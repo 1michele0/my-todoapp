@@ -30,9 +30,17 @@ function TaskItem({ task, index, list, setList }) {
     setList(updatedList);
   }
 
+  function markTask() {
+    textRef.current.style.textDecoration =
+      textRef.current.style.textDecoration === "line-through"
+        ? "none"
+        : "line-through";
+  }
+
   return (
     <li>
       <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+        <input type="checkbox" onChange={markTask} />
         <span ref={textRef}>{task}</span>
         <input ref={inputRef} type="text" defaultValue={task} hidden />
 
