@@ -8,16 +8,10 @@ function App() {
   const [taskList, setTaskList] = useState([]);
   const handleTaskList = (task) => { setTaskList([...taskList, task]) };
 
-  function addTask(formData) {
-    const task = formData.get("task");
-    if (!task) return;
-    handleTaskList(task);
-  }
-
   return (
     <>
       <AppTitle />
-      <AddTaskForm handleAddTask={addTask} />
+      <AddTaskForm handleTaskList={handleTaskList} />
       <ShowTaskList list={taskList} setList={setTaskList} />
     </>
   )
