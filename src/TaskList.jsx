@@ -1,19 +1,21 @@
 import TaskItem from "./TaskItem.jsx";
+import { useContext } from "react";
+import { TaskContext } from "./TaskContext.jsx";
 
-function ShowTaskList({ list, setList }) {
-  if (list.length === 0) {
+function TaskList() {
+  const {taskList} = useContext(TaskContext);
+
+  if (taskList.length === 0) {
     return <p>No tasks available.</p>;
   }
   else {
     return (
       <ul>
-        {list.map((task, index) => (
+        {taskList.map((task, index) => (
           <TaskItem
             key={index}
             task={task}
             index={index}
-            list={list}
-            setList={setList}
           />
         ))}
       </ul>
@@ -22,4 +24,4 @@ function ShowTaskList({ list, setList }) {
   
 }
 
-export default ShowTaskList;
+export default TaskList;

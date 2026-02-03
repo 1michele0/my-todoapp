@@ -1,6 +1,10 @@
-import { useRef } from 'react'
+import { useRef, useContext } from 'react'
+import { TaskContext } from './TaskContext';
 
-function TaskItem({ task, index, list, setList }) {
+function TaskItem({ task, index }) {
+
+  const { update, destroy } = useContext(TaskContext);
+
   const textRef = useRef(null);
   const inputRef = useRef(null);
   const editBtnRef = useRef(null);
@@ -15,9 +19,7 @@ function TaskItem({ task, index, list, setList }) {
 
   function saveTaskText() {
     const newText = inputRef.current.value;
-    const updatedList = [...list];
-    updatedList[index] = newText;
-    setList(updatedList);
+    update(index, newText)
 
     textRef.current.hidden = false;
     editBtnRef.current.hidden = false;
@@ -26,8 +28,7 @@ function TaskItem({ task, index, list, setList }) {
   }
 
   function deleteTask() {
-    const updatedList = list.filter((_, i) => i !== index);
-    setList(updatedList);
+    destroy(index)
   }
 
   function markTask() {
